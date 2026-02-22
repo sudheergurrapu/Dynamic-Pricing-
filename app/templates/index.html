@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Pricing System</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Dynamic Pricing System for Online Stores</h1>
+      <section class="grid">
+        <form id="pricing-form" class="card">
+          <h2>Input Signals</h2>
+          <label>Base Price <input type="number" step="0.01" id="base_price" value="100" required /></label>
+          <label>Demand Index <input type="number" step="0.01" id="demand_index" value="0.9" min="0" max="2" required /></label>
+          <label>Competitor Price <input type="number" step="0.01" id="competitor_price" value="95" required /></label>
+          <label>Inventory Level <input type="number" id="inventory_level" value="140" required /></label>
+          <label>Customer Segment
+            <select id="customer_segment">
+              <option value="new">New</option>
+              <option value="regular" selected>Regular</option>
+              <option value="vip">VIP</option>
+            </select>
+          </label>
+          <label>Month <input type="number" id="month" min="1" max="12" value="11" /></label>
+          <label>Day of Week <input type="number" id="day_of_week" min="0" max="6" value="4" /></label>
+          <button type="submit">Optimize Price</button>
+          <p class="small">Auto-refresh every <span id="refresh-ms">{{ refresh_ms }}</span> ms</p>
+        </form>
+
+        <section class="card" id="output">
+          <h2>Predictions</h2>
+          <p>Optimized Price: <strong id="optimized_price">-</strong></p>
+          <p>Bounded Price (RL): <strong id="bounded_price">-</strong></p>
+          <p>Revenue Prediction: <strong id="revenue_prediction">-</strong></p>
+          <p>Confidence Score: <strong id="confidence_score">-</strong></p>
+          <p>Revenue Uplift %: <strong id="uplift">-</strong></p>
+          <p>Conversion Improvement %: <strong id="conversion">-</strong></p>
+          <p>Selected Model: <strong id="model_name">-</strong></p>
+        </section>
+      </section>
+
+      <section class="grid">
+        <section class="card">
+          <h2>Static vs Dynamic Pricing</h2>
+          <canvas id="priceChart"></canvas>
+        </section>
+        <section class="card">
+          <h2>KPIs</h2>
+          <ul id="kpi-list">
+            <li>Revenue Growth: <strong id="kpi_revenue">-</strong></li>
+            <li>Profit Margin: <strong id="kpi_margin">-</strong></li>
+            <li>Conversion Rate: <strong id="kpi_conversion">-</strong></li>
+            <li>Inventory Turnover: <strong id="kpi_turnover">-</strong></li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
